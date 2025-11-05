@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+// src/App.jsx
+import React, { useEffect, useState } from "react";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 import {
   Home,
@@ -28,9 +29,9 @@ import {
   Wallet as WalletIcon,
 } from "lucide-react";
 
-// ===========================
-// Data & Utilities
-// ===========================
+/* ===========================
+   Data & Utilities
+   =========================== */
 const templateCarouselData = [
   {
     title: "Food & Restaurant Template",
@@ -168,9 +169,9 @@ const hexToRgbaString = (hex, alpha) => {
   return `rgba(${r}, ${g}, ${b}, ${finalAlpha.toFixed(2)})`;
 };
 
-// ===========================
-// Small helper icons
-// ===========================
+/* ===========================
+   Small helper icons
+   =========================== */
 const CheckIcon = () => (
   <svg className="h-5 w-5 text-green-500 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="2" stroke="currentColor">
     <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
@@ -182,9 +183,9 @@ const CrossIcon = () => (
   </svg>
 );
 
-// ===========================
-// BillingToggle (Pill style)
-// ===========================
+/* ===========================
+   BillingToggle
+   =========================== */
 const BillingToggle = ({ isYearly, onToggle }) => {
   const commonButtonClass = "py-2 px-5 rounded-full transition-all duration-300 ease-in-out font-medium text-sm";
   const activeButtonClass = "bg-white text-purple-600 shadow-md";
@@ -205,9 +206,9 @@ const BillingToggle = ({ isYearly, onToggle }) => {
   );
 };
 
-// ===========================
-// PricingCards
-// ===========================
+/* ===========================
+   PricingCards
+   =========================== */
 const PricingCards = ({ plans, isYearly }) => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
@@ -215,13 +216,9 @@ const PricingCards = ({ plans, isYearly }) => {
         const displayPrice = isYearly ? parseInt(plan.yearlyPrice).toLocaleString("en-IN") : parseInt(plan.monthlyPrice).toLocaleString("en-IN");
         const displayCycle = isYearly ? "/ YEAR" : "/ MONTH";
 
-        const cardClasses = `rounded-lg p-6 text-center transition-all duration-300 ${
-          plan.isHighlighted ? "border-2 border-purple-500 shadow-2xl transform scale-105 bg-white dark:bg-gray-900" : "border border-gray-200 bg-white dark:bg-gray-800"
-        }`;
+        const cardClasses = `rounded-lg p-6 text-center transition-all duration-300 ${plan.isHighlighted ? "border-2 border-purple-500 shadow-2xl transform scale-105 bg-white dark:bg-gray-900" : "border border-gray-200 bg-white dark:bg-gray-800"}`;
 
-        const buttonClasses = `mt-6 block w-full py-3 px-4 rounded-lg font-medium text-center transition-all text-sm ${
-          plan.isHighlighted ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:shadow-lg" : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600"
-        }`;
+        const buttonClasses = `mt-6 block w-full py-3 px-4 rounded-lg font-medium text-center transition-all text-sm ${plan.isHighlighted ? "bg-gradient-to-r from-purple-600 to-pink-500 text-white hover:shadow-lg" : "bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 hover:bg-gray-200 dark:hover:bg-gray-600"}`;
 
         return (
           <div key={plan.name} className={`${cardClasses} opacity-0 transform scale-98 animate-fade-in`} style={{ animationDelay: "0.06s", animationFillMode: "forwards" }}>
@@ -249,9 +246,9 @@ const PricingCards = ({ plans, isYearly }) => {
   );
 };
 
-// ===========================
-// PricingTable
-// ===========================
+/* ===========================
+   PricingTable
+   =========================== */
 const PricingTable = ({ plans }) => {
   const getFeatureCell = (plan, featureKey) => {
     const { features } = plan;
@@ -321,9 +318,9 @@ const PricingTable = ({ plans }) => {
   );
 };
 
-// ===========================
-// Polished Pricing Section (self-contained + subtle animation)
-// ===========================
+/* ===========================
+   PricingSection (without the "Detailed Feature Comparison" heading)
+   =========================== */
 function PricingSection() {
   const [isYearly, setIsYearly] = useState(true);
   const [mounted, setMounted] = useState(false);
@@ -352,9 +349,8 @@ function PricingSection() {
           <PricingCards plans={plans} isYearly={isYearly} />
         </div>
 
-        {/* Feature table */}
+        {/* Feature table only (heading removed as requested) */}
         <div className="space-y-6">
-          <h3 className="text-3xl font-semibold text-center text-gray-900 dark:text-white">Detailed Feature Comparison</h3>
           <PricingTable plans={plans} />
         </div>
       </div>
@@ -362,12 +358,9 @@ function PricingSection() {
   );
 }
 
-// ===========================
-// Remaining sections
-// Header, HeroSection, FeaturesSection, TemplatesSection, HowItWorksStep, Footer, ScrollToTopButton
-// Kept mostly unchanged from your original, with Footer updated below.
-// ===========================
-
+/* ===========================
+   Header
+   =========================== */
 function Header({ theme, setTheme }) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeSection, setActiveSection] = useState("home");
@@ -414,9 +407,7 @@ function Header({ theme, setTheme }) {
                 <a
                   key={item.id}
                   href={item.href}
-                  className={`flex items-center space-x-2 text-gray-700 dark:text-gray-300 transition-all duration-200 font-medium group nav-link py-2 px-3 rounded-full ${
-                    isActive ? "scale-110" : "hover:scale-105 hover:bg-gray-200/50 dark:hover:bg-gray-700/50"
-                  }`}
+                  className={`flex items-center space-x-2 text-gray-700 dark:text-gray-300 transition-all duration-200 font-medium group nav-link py-2 px-3 rounded-full ${isActive ? "scale-110" : "hover:scale-105 hover:bg-gray-200/50 dark:hover:bg-gray-700/50"}`}
                 >
                   <item.icon className={`w-4 h-4 transition-colors ${isActive ? "text-purple-600 dark:text-purple-400" : "text-purple-500 dark:text-purple-400"}`} />
                   <span className={isActive ? "text-purple-600 dark:text-purple-400" : "text-gray-700 dark:text-gray-300"}>{item.name}</span>
@@ -477,6 +468,9 @@ function Header({ theme, setTheme }) {
   );
 }
 
+/* ===========================
+   HeroSection
+   =========================== */
 function HeroSection() {
   return (
     <section id="home" className="pt-40 pb-24 px-6 relative overflow-hidden bg-gradient-to-br from-white via-purple-50 to-white dark:from-gray-900 dark:via-[#020024] dark:to-gray-900">
@@ -524,6 +518,9 @@ function HeroSection() {
   );
 }
 
+/* ===========================
+   Features Section
+   =========================== */
 function FeaturesSection() {
   const allFeatures = [
     { id: "builder", title: "Easy Builder", description: "Set up your eCommerce store in minutes with drag-and-drop builder.", icon: Palette, iconColor: "text-purple-600" },
@@ -764,6 +761,9 @@ function FeaturesSection() {
   );
 }
 
+/* ===========================
+   HowItWorksStep
+   =========================== */
 function HowItWorksStep({ icon, number, title, description }) {
   return (
     <div className="flex flex-col col-span-1 items-center p-6 text-center text-gray-800 dark:text-white">
@@ -779,6 +779,9 @@ function HowItWorksStep({ icon, number, title, description }) {
   );
 }
 
+/* ===========================
+   TemplatesSection
+   =========================== */
 function TemplatesSection() {
   const [activeIndex, setActiveIndex] = useState(0);
   useEffect(() => {
@@ -869,39 +872,109 @@ function TemplatesSection() {
   );
 }
 
+/* ===========================
+   Footer (white background)
+   =========================== */
 function Footer({ theme, onToggleTheme }) {
-  // derive label from theme so initial label is "Dark" when theme === "light"
-  const label = theme === "dark" ? "Light" : "Dark";
+  const label = theme === "dark" ? "Light Mode" : "Dark Mode";
 
   return (
-    <footer className="py-12 px-6 bg-gray-100 dark:bg-gray-900">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
+    <footer className="bg-white text-gray-800 border-t border-gray-200 pt-12 pb-6 px-6 transition-colors duration-300">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
         <div>
-          <img src="/images/logo.png" alt="logo" className="h-10" onError={(e) => (e.target.src = "https://placehold.co/150x40/4c1d95/ffffff?text=LOGO")} />
-          <p className="mt-4 text-gray-700 dark:text-gray-300 max-w-sm">All-in-one eCommerce platform to start, run and grow your online business.</p>
-        </div>
-        <div>
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Company</h4>
-          <ul className="space-y-2 text-gray-700 dark:text-gray-300">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#why-choose-us">Features</a></li>
-            <li><a href="#templates">Templates</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 className="font-semibold text-gray-900 dark:text-white mb-3">Actions</h4>
-          <div className="flex space-x-3">
-            <button onClick={onToggleTheme} className="px-4 py-2 rounded-md bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-100 font-medium transition-colors">
-              {label}
-            </button>
+          <img
+            src="/images/logo.png"
+            alt="my app"
+            className="h-12 mb-4"
+            onError={(e) =>
+              (e.target.src =
+                "https://placehold.co/150x40/9333ea/ffffff?text=Logo")
+            }
+          />
+          <p className="text-sm leading-relaxed text-gray-600 mb-6">
+            Ecom-Store is a user-friendly, feature-rich eCommerce platform that
+            lets you launch your online store in 10 minutes, manage sales, and
+            receive direct WhatsApp orders easily.
+          </p>
+          <div className="flex space-x-4 text-gray-500">
+            {["facebook-f", "instagram", "twitter", "linkedin-in", "youtube", "whatsapp"].map(
+              (icon, i) => (
+                <a
+                  key={i}
+                  href="#"
+                  className="hover:text-purple-600 transition-transform transform hover:scale-110"
+                  aria-label={icon}
+                >
+                  <i className={`fab fa-${icon} text-lg`} />
+                </a>
+              )
+            )}
           </div>
         </div>
+
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Quick Links</h3>
+          <ul className="space-y-2 text-sm">
+            <li>
+              <a href="#home" className="hover:text-purple-600 hover:underline">Home</a>
+            </li>
+            <li>
+              <a href="#why-choose-us" className="hover:text-purple-600 hover:underline">Features</a>
+            </li>
+            <li>
+              <a href="#pricing" className="hover:text-purple-600 hover:underline">Pricing</a>
+            </li>
+            <li>
+              <a href="#templates" className="hover:text-purple-600 hover:underline">Templates</a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 className="text-lg font-semibold text-gray-900 mb-4">Contact Us</h3>
+          <ul className="space-y-3 text-sm">
+            <li className="flex items-center space-x-2">
+              <i className="fas fa-phone-alt text-purple-500" />
+              <span>+91 9344482370</span>
+            </li>
+            <li className="flex items-center space-x-2">
+              <i className="fas fa-envelope text-purple-500" />
+              <span>support@onlineshop4u.in</span>
+            </li>
+            <li className="flex items-center space-x-2">
+              <i className="fas fa-map-marker-alt text-purple-500" />
+              <span>T. Nagar, Chennai - 600017</span>
+            </li>
+          </ul>
+        </div>
       </div>
-      <div className="text-center text-sm text-gray-600 dark:text-gray-400 mt-10">© {new Date().getFullYear()} Online4U. All rights reserved.</div>
+
+      <div className="border-t border-gray-200 pt-6 mt-8 text-sm flex flex-col md:flex-row items-center justify-between max-w-7xl mx-auto space-y-4 md:space-y-0">
+        <p className="text-gray-500">© {new Date().getFullYear()} my app. All rights reserved.</p>
+
+        <div className="flex flex-wrap justify-center space-x-4 text-gray-500">
+          <a href="#" className="hover:text-purple-600">Terms & Conditions</a>
+          <a href="#" className="hover:text-purple-600">Privacy Policy</a>
+          <a href="#" className="hover:text-purple-600">Shipping Policy</a>
+          <a href="#" className="hover:text-purple-600">Return/Refund Policy</a>
+        </div>
+
+        <button onClick={onToggleTheme} className="flex items-center space-x-2 bg-gray-100 hover:bg-gray-200 text-gray-800 px-4 py-2 rounded-md transition">
+          <i className={`fas ${theme === "dark" ? "fa-sun" : "fa-moon"}`} />
+          <span>{label}</span>
+        </button>
+      </div>
+
+      <div className="text-center text-xs text-gray-400 mt-4">
+        Designed by <span className="text-purple-600 font-medium">Carrot Ad Works</span>
+      </div>
     </footer>
   );
 }
 
+/* ===========================
+   ScrollToTopButton
+   =========================== */
 function ScrollToTopButton() {
   const [visible, setVisible] = useState(false);
   useEffect(() => {
@@ -917,11 +990,12 @@ function ScrollToTopButton() {
   );
 }
 
-// ===========================
-// App (main) — export default
-// ===========================
+/* ===========================
+   App (main)
+   =========================== */
 export default function App() {
   const [theme, setTheme] = useState("light"); // start light so button initially shows "Dark"
+
   useEffect(() => {
     const html = document.documentElement;
     if (theme === "dark") html.classList.add("dark");
@@ -948,6 +1022,8 @@ export default function App() {
         @keyframes pill-glow { 0%,100% { transform: scale(1); box-shadow: 0 0 25px rgba(239,68,68,0.6); } 50% { transform: scale(1.03); box-shadow: 0 0 40px rgba(239,68,68,0.9); } }
         .animate-pill-glow { animation: pill-glow 2.5s infinite ease-in-out; }
         body { font-family: 'Inter', sans-serif; }
+        @keyframes progressBar { 0% { width: 0% } 100% { width: 100% } }
+        .animate-progress-bar { animation: progressBar 3s linear infinite; }
       `}</style>
 
       <div className="min-h-screen w-full bg-gray-50 dark:bg-[#020024] text-gray-800 dark:text-gray-200 relative transition-colors duration-300 overflow-x-hidden">
